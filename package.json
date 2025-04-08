@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx playwright test tests/user.spec.ts --headed chrome"
+    "test": "npx playwright test tests/user.spec.ts --headed chrome "
   },
   "keywords": [],
   "author": "",

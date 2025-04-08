@@ -2,7 +2,7 @@ import test, { expect } from '@playwright/test';
 import { login } from '../helpers';
 
 test('create new user', async ({ page }) => {
-  const username = 'Admin11';
+  const username = 'Busayo12';
   await login(page, 'Admin', 'admin123');
 
   await page.goto(
@@ -35,7 +35,6 @@ test('create new user', async ({ page }) => {
     .getByRole('option', { name: 'Searching....' })
     .waitFor({ state: 'hidden' });
 
-  // Finally, click the first optionawait page.getByRole('textbox', { name: 'Type for hints...' }).fill('ab');
   await page
     .locator("(//div[contains(@class, 'oxd-autocomplete-option')])[1]")
     .click();
@@ -55,11 +54,11 @@ test('create new user', async ({ page }) => {
   await expect(passwordField2).toBeVisible();
   await passwordField2.fill('Admin123');
 
-
-
   await page.getByRole('button', { name: 'Save' }).click();
 
-  await page.getByText('System Users').waitFor({ state: 'visible' });
+  await page
+    .locator("//h5[normalize-space()='System Users']")
+    .waitFor({ state: 'visible' });
 
   const input = page.locator(
     "(//input[@class='oxd-input oxd-input--active'])[2]"
@@ -72,7 +71,6 @@ test('create new user', async ({ page }) => {
   await expect(rowGroup).toContainText(username);
 
   //clean up test by deleting user
-  await page.locator("//i[@class='oxd-icon bi-trash']").click()
+  await page.locator("//i[@class='oxd-icon bi-trash']").click();
   await page.getByRole('button', { name: 'Yes, Delete' }).click();
-
 });
