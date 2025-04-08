@@ -70,7 +70,7 @@ test('create new user', async ({ page }) => {
   const rowGroup = page.getByRole('row').nth(1);
   await expect(rowGroup).toContainText(username);
 
-  //clean up test by deleting user
+  //clean up test by deleting users
   await page.locator("//i[@class='oxd-icon bi-trash']").click();
   await page.getByRole('button', { name: 'Yes, Delete' }).click();
 });
