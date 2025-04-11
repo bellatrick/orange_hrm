@@ -15,8 +15,9 @@ steps:
     npx playwright install --with-deps
   displayName: 'Install Playwright Browsers'
 - script: |
-    npm run test
+    npx playwright test
   displayName: 'Run Playwright tests'
+
 
 - task: PublishTestResults@2
   condition: succeededOrFailed()
@@ -26,6 +27,7 @@ steps:
     mergeTestResults: true
     testRunTitle: 'Playwright Tests'
   displayName: 'Publish Test Results'
+  dependsOn: 'Run Playwright Tests'
 
 - task: PublishBuildArtifacts@1
   condition: succeededOrFailed()
@@ -33,6 +35,7 @@ steps:
     pathtoPublish: 'playwright-report'
     artifactName: 'playwright-report'
   displayName: 'Publish Playwright Report'
+  dependsOn: 'Run Playwright Tests'
 
 
 
