@@ -8,16 +8,19 @@ steps:
 - task: NodeTool@0
   inputs:
     versionSpec: 'lts/*'
+  displayName: 'Install Node.js'
+
 - script: |
     npm ci
   displayName: 'Install dependencies'
+
 - script: |
     npx playwright install --with-deps
   displayName: 'Install Playwright Browsers'
+
 - script: |
     npx playwright test
   displayName: 'Run Playwright tests'
-
 
 - task: PublishTestResults@2
   condition: succeededOrFailed()
@@ -27,7 +30,6 @@ steps:
     mergeTestResults: true
     testRunTitle: 'Playwright Tests'
   displayName: 'Publish Test Results'
-  dependsOn: 'Run Playwright Tests'
 
 - task: PublishBuildArtifacts@1
   condition: succeededOrFailed()
@@ -35,7 +37,3 @@ steps:
     pathtoPublish: 'playwright-report'
     artifactName: 'playwright-report'
   displayName: 'Publish Playwright Report'
-  dependsOn: 'Run Playwright Tests'
-
-
-
